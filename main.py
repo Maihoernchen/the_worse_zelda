@@ -1,4 +1,5 @@
 import pygame
+import time
 
 pygame.init()
 
@@ -20,45 +21,82 @@ height = 20
 vel = 1
 
 run = True
+situation = "open"
+
+def blink(times):
+
+    i = 0
+
+    while i < times:
+
+        win.fill((0,0,0))
+
+        pygame.display.update()
+
+        pygame.time.delay(200)
+
+        win.fill((255,255,255))
+
+        pygame.display.update()
+
+        i +=1
 
 while run:
-	# creates time delay of 10ms
-	pygame.time.delay(10)
+    while situation == "open" and run:
+	    # creates time delay of 10ms
+        pygame.time.delay(10)
 
-	for event in pygame.event.get():
+        for event in pygame.event.get():
 
-		if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT:
 
-			run = False
+                run = False
 
-	keys = pygame.key.get_pressed()
+        keys = pygame.key.get_pressed()
 
-	if keys[pygame.K_LEFT] and x>0:
+        if keys[pygame.K_LEFT] and x>0:
 
-		x -= vel
+            x -= vel
 
-	if keys[pygame.K_RIGHT] and x<960-width:
+        if keys[pygame.K_RIGHT] and x<960-width:
 
 		# increment in x co-ordinate
-		x += vel
+            x += vel
 
 	# if left arrow key is pressed
-	if keys[pygame.K_UP] and y>0:
+        if keys[pygame.K_UP] and y>0:
 
 		# decrement in y co-ordinate
-		y -= vel
+            y -= vel
 
 	# if left arrow key is pressed
-	if keys[pygame.K_DOWN] and y<540-height:
+        if keys[pygame.K_DOWN] and y<540-height:
 
-		y += vel
+            y += vel
 
-	win.fill((0, 0, 0))
+        if x == 0 and y == 0:
 
-	win.blit(bg, (-50,-50))
+            blink(3)
 
-	pygame.draw.rect(win, (255, 0, 0), (x, y, width, height))
+            situation = "combat"
 
-	pygame.display.update()
+        win.fill((0, 0, 0))
+
+        win.blit(bg, (-50,-50))
+
+        pygame.draw.rect(win, (255, 0, 0), (x, y, width, height))
+
+        pygame.display.update()
+
+    while situation == "combat" and run:
+
+        for event in pygame.event.get():
+
+            if event.type == pygame.QUIT:
+
+                run = False
+
+        win.fill((255,255,255))
+        pygame.display.update()
 
 pygame.quit()
