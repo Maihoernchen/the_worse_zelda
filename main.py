@@ -9,6 +9,7 @@ win = pygame.display.set_mode((480, 270), pygame.FULLSCREEN)
 
 # set the pygame window name
 pygame.display.set_caption("Moving rectangle")
+pygame.mouse.set_visible(False)
 
 # object current co-ordinates
 x = 200
@@ -25,21 +26,17 @@ situation = "open"
 
 def blink(times):
 
-    i = 0
+	i = 0
 
-    while i < times:
+	while i < times:
 
-        win.fill((0,0,0))
-
-        pygame.display.update()
-
-        pygame.time.delay(200)
-
-        win.fill((255,255,255))
-
-        pygame.display.update()
-
-        i +=1
+		win.fill((0,0,0))
+		pygame.display.update()
+		pygame.time.delay(100)
+		win.fill((255,255,255))
+		pygame.display.update()
+		pygame.time.delay(100)
+		i +=1
 
 while run:
     while situation == "open" and run:
@@ -76,9 +73,8 @@ while run:
 
         if x == 0 and y == 0:
 
-            blink(3)
-
             situation = "combat"
+            blink(3)
 
         win.fill((0, 0, 0))
 
@@ -97,6 +93,7 @@ while run:
                 run = False
 
         win.fill((255,255,255))
+        win.blit(bg, (-50,-50))
         pygame.display.update()
 
 pygame.quit()
