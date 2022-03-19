@@ -3,17 +3,17 @@ import time
 
 pygame.init()
 
-bg = pygame.image.load("phandalin.png")
+bg = pygame.image.load("MapImages/mountvillage.png")
 
-win = pygame.display.set_mode((480, 270), pygame.FULLSCREEN)
+win = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
 
 # set the pygame window name
 pygame.display.set_caption("Moving rectangle")
 pygame.mouse.set_visible(False)
 
 # object current co-ordinates
-x = 200
-y = 200
+x = 400
+y = 400
 
 # dimensions of the object
 width = 20
@@ -78,7 +78,7 @@ while run:
 
         win.fill((0, 0, 0))
 
-        win.blit(bg, (-50,-50))
+        win.blit(bg, (0,0))
 
         pygame.draw.rect(win, (255, 0, 0), (x, y, width, height))
 
