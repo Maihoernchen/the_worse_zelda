@@ -1,28 +1,41 @@
 import pygame
 import time
 
+# containersize: 48px
+# doubled: 96px
+
 pygame.init()
 
 bg = pygame.image.load("MapImages/mountvillage.png")
 
-win = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
+win = pygame.display.set_mode((1200,1200))
 
 # set the pygame window name
 pygame.display.set_caption("Moving rectangle")
 pygame.mouse.set_visible(False)
 
 # object current co-ordinates
-x = 400
-y = 400
+x = 100
+y = 100
+
+BLACK = (0, 0, 0)
+WHITE = (200, 200, 200)
 
 # dimensions of the object
-width = 20
-height = 20
+width = 48
+height = 48
 
-vel = 1
+vel = 2
 
 run = True
 situation = "open"
+
+def drawGrid():
+    blockSize = 48 #Set the size of the grid block
+    for x in range(0, 1200, blockSize):
+        for y in range(0, 1200, blockSize):
+            rect = pygame.Rect(x, y, blockSize, blockSize)
+            pygame.draw.rect(win, WHITE, rect, 1)
 
 def blink(times):
 
@@ -39,61 +52,62 @@ def blink(times):
 		i +=1
 
 while run:
-    while situation == "open" and run:
 	    # creates time delay of 10ms
-        pygame.time.delay(10)
+	pygame.time.delay(10)
 
-        for event in pygame.event.get():
+	drawGrid()
 
-            if event.type == pygame.QUIT:
+	for event in pygame.event.get():
 
-                run = False
+		print(x,y)
 
-        keys = pygame.key.get_pressed()
+		if event.type == pygame.QUIT:
 
-        if keys[pygame.K_LEFT] and x>0:
+			run = False
 
-            x -= vel
+	keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_RIGHT] and x<960-width:
+	if keys[pygame.K_LEFT] and x>0:
+
+		x -= vel
+
+	if keys[pygame.K_RIGHT] and x<600:
 
 		# increment in x co-ordinate
-            x += vel
+		x += vel
 
 	# if left arrow key is pressed
-        if keys[pygame.K_UP] and y>0:
+	if keys[pygame.K_UP] and y>0:
 
 		# decrement in y co-ordinate
-            y -= vel
+		y -= vel
 
 	# if left arrow key is pressed
-        if keys[pygame.K_DOWN] and y<540-height:
+	if keys[pygame.K_DOWN] and y<600:
 
-            y += vel
+		y += vel
 
-        if x == 0 and y == 0:
+	if x == 0 and y == 0:
 
-            situation = "combat"
-            blink(3)
+		situation = "combat"
+		blink(3)
 
-        win.fill((0, 0, 0))
+	win.fill((0, 0, 0))
+	win.blit(bg, (-x, -y))
 
-        win.blit(bg, (0,0))
+	pygame.draw.rect(win, (255, 0, 0), (x, y, width, height))
 
-        pygame.draw.rect(win, (255, 0, 0), (x, y, width, height))
+	pygame.display.update()
 
-        pygame.display.update()
+	while situation == "combat" and run:
+		for event in pygame.event.get():
 
-    while situation == "combat" and run:
+			if event.type == pygame.QUIT:
 
-        for event in pygame.event.get():
+				run = False
 
-            if event.type == pygame.QUIT:
-
-                run = False
-
-        win.fill((255,255,255))
-        win.blit(bg, (-50,-50))
-        pygame.display.update()
+		win.fill((255,255,255))
+		win.blit(bg, (0-x,0-y))
+		pygame.display.update()
 
 pygame.quit()
