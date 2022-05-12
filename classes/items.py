@@ -1,12 +1,20 @@
 import random
 
+class backpack:
+
+    slots = 10
+
 class light_leather_armor:
     armor = 5
     slow = 0
+    durability = 60
 
 class nothing:
-    armor = 0
+    damage = 5
+    armor = 1
     slow = 0
+    durability = None
 
 class axe:
-    damage = 4 + random.choice([0,9])
+    damage = random.choice([0,10])
+

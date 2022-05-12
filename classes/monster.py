@@ -10,5 +10,8 @@ class ork:
     defense = body.armor + head.armor + leggs.armor
     damage = hand.damage
     def attack(self):
+        edamage = self.damage - player.stats.defense
+        print(edamage)
         if self.damage > player.stats.defense:
-            player.stats.hp -= self.damage
+            player.stats.hp -= edamage
+        player.equipped.body.durability -= edamage

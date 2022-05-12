@@ -1,23 +1,27 @@
 from . import items
 
+class equipped:
+    head = items.nothing
+    body = items.light_leather_armor
+    hand = items.nothing
+    backpack = items.backpack
+    def equip(self,slot,item):
+        self.slot = item
+
 class inventory:
-    slots = 10
+    slots = equipped.backpack.slots
     stuff = []
     def add(self,item):
         self.stuff.append(item)
 
-class equipped:
-    head = items.nothing
-    body = items.light_leather_armor
-    leggs = items.nothing
-    hand = items.nothing
-    def equip(self,slot,item):
-        self.slot = item
-
 class stats:
-    damage = equipped.hand
-    defense = equipped.head.armor + equipped.body.armor + equipped.leggs.armor
-    hp = 5
+    level = 0
+    hplist = [10,12,15,18,25,35]
+    damage = equipped.hand.damage
+    defense = equipped.body.armor
+    hp = hplist[level]
+    def levelup(self):
+        self.level += 1
 
 class spells:
     def attacke(self):
