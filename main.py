@@ -8,7 +8,7 @@ pygame.init()
 
 bg = pygame.image.load("MapImages/mountvillage.png")
 
-win = pygame.display.set_mode((1200,1200))
+win = pygame.display.set_mode((600,600))
 
 # set the pygame window name
 pygame.display.set_caption("Moving rectangle")
@@ -17,6 +17,12 @@ pygame.mouse.set_visible(False)
 # object current co-ordinates
 x = 100
 y = 100
+
+class Player(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.image.load("Player_Sprite_R.png")
+        self.rect = self.image.get_rect()
 
 BLACK = (0, 0, 0)
 WHITE = (200, 200, 200)
