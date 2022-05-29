@@ -2,6 +2,16 @@ from classes import player as player
 from classes import monster as monster
 from classes import npcs as npcs
 from classes import items as items
+from fetch import fetchdata
+from startmenu import show
+
+savestate = show()
+gameinfo = fetchdata(savestate)
+
+player.stats.hp = gameinfo["hp"]
+player.stats.level = gameinfo["level"]
+
+print(gameinfo)
 
 ork = monster.ork()
 you = player.stats()

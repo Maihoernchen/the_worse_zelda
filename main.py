@@ -1,8 +1,12 @@
 import pygame
 import time
+import fetch
+import startmenu
 
 # containersize: 48px
 # doubled: 96px
+
+gameinfo = fetch.fetchdata(0)
 
 pygame.init()
 
@@ -18,11 +22,6 @@ pygame.mouse.set_visible(False)
 x = 100
 y = 100
 
-class Player(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.image = pygame.image.load("Player_Sprite_R.png")
-        self.rect = self.image.get_rect()
 
 BLACK = (0, 0, 0)
 WHITE = (200, 200, 200)
@@ -35,13 +34,6 @@ vel = 2
 
 run = True
 situation = "open"
-
-def drawGrid():
-    blockSize = 48 #Set the size of the grid block
-    for x in range(0, 1200, blockSize):
-        for y in range(0, 1200, blockSize):
-            rect = pygame.Rect(x, y, blockSize, blockSize)
-            pygame.draw.rect(win, WHITE, rect, 1)
 
 def blink(times):
 
@@ -60,8 +52,6 @@ def blink(times):
 while run:
 	    # creates time delay of 10ms
 	pygame.time.delay(10)
-
-	drawGrid()
 
 	for event in pygame.event.get():
 
