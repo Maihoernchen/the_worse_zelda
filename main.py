@@ -6,6 +6,11 @@ import startmenu
 # containersize: 48px
 # doubled: 96px
 
+left_collide = []
+right_collide = []
+up_collide = []
+down_collide = []
+
 gameinfo = fetch.fetchdata(0)
 
 pygame.init()
@@ -29,8 +34,6 @@ WHITE = (200, 200, 200)
 # dimensions of the object
 width = 48
 height = 48
-
-vel = 2
 
 run = True
 situation = "open"
@@ -63,25 +66,25 @@ while run:
 
 	keys = pygame.key.get_pressed()
 
-	if keys[pygame.K_LEFT] and x>0:
+	if keys[pygame.K_LEFT] and x>0 and x not in left_collide:
 
-		x -= vel
+		x -= 12
 
 	if keys[pygame.K_RIGHT] and x<600:
 
 		# increment in x co-ordinate
-		x += vel
+		x += 12
 
 	# if left arrow key is pressed
 	if keys[pygame.K_UP] and y>0:
 
 		# decrement in y co-ordinate
-		y -= vel
+		y -= 12
 
 	# if left arrow key is pressed
 	if keys[pygame.K_DOWN] and y<600:
 
-		y += vel
+		y += 12
 
 	if x == 0 and y == 0:
 
