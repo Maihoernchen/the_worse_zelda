@@ -4,7 +4,6 @@ import gamesave
 import startmenu
 from classes import player
 
-
 pygame.init()
 
 class you(pygame.sprite.Sprite):
@@ -29,8 +28,6 @@ pygame.mouse.set_visible(False)
 
 width = 48
 height = 48
-
-vel = 2
 
 run = True
 situation = "open"
@@ -62,6 +59,7 @@ while run:
 			run = False
 
 	keys = pygame.key.get_pressed()
+
 
 	if keys[pygame.K_LEFT] and you.x>0:
 		you.x -= vel
