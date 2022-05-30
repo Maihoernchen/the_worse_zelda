@@ -18,10 +18,10 @@ gameinfo = gamesave.fetchdata(selected)
 hp = gameinfo["hp"]
 bg = pygame.image.load(gameinfo["map"])
 you.x,you.y = gameinfo["position"]
-
-
+vel = 1
+foot = "left"
 win = pygame.display.set_mode((600,600))
-
+imag = ("reccources/southstand.png")
 
 pygame.display.set_caption("The Worse Zelda")
 pygame.mouse.set_visible(False)
@@ -102,7 +102,7 @@ while run:
 				run = False
 
 		win.fill((255,255,255))
-		win.blit(bg, (0-x,0-y))
+		win.blit(bg, (0-you.x,0-you.y))
 		pygame.display.update()
 
 pygame.quit()
