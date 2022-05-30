@@ -20,8 +20,16 @@ bg = pygame.image.load(gameinfo["map"])
 you.x,you.y = gameinfo["position"]
 vel = 1
 foot = "left"
+f = 0
 win = pygame.display.set_mode((600,600))
 imag = ("reccources/southstand.png")
+
+def toggle(foot):
+	if foot == "left":
+		foot = "right"
+	else:
+		foot = "left"
+	return foot
 
 pygame.display.set_caption("The Worse Zelda")
 pygame.mouse.set_visible(False)
@@ -60,24 +68,28 @@ while run:
 
 	keys = pygame.key.get_pressed()
 
-
+	if f%20 == 0:
+		foot = toggle(foot)
+ 
 	if keys[pygame.K_LEFT] and you.x>0:
 		you.x -= vel
+		f+=1
 		imag = 'reccources/westwalk' + foot + '.png'
-
 	if keys[pygame.K_RIGHT] and you.x<600:
 		you.x += vel
+		f+=1
 		imag = 'reccources/eastwalk' + foot + '.png'
-
 	# if left arrow key is pressed
 	if keys[pygame.K_UP] and you.y>0:
 
 		# decrement in y co-ordinate
 		you.y -= vel
+		f+=1
 		imag = 'reccources/northwalk' + foot + '.png'
 	# if left arrow key is pressed
 	if keys[pygame.K_DOWN] and you.y<600:
 		you.y += vel
+		f+=1
 		imag = 'reccources/southwalk' + foot + '.png'
 	if keys[pygame.K_ESCAPE]:
 		gamesave.pushdata(selected)
@@ -88,6 +100,7 @@ while run:
 		blink(3)
 
 	you.image = pygame.image.load(imag)
+	print(imag)
 	win.fill((0, 0, 0))
 	win.blit(bg, (-you.x, -you.y))
 	win.blit(you.image, (you.x,you.y))

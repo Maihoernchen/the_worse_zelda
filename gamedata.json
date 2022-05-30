@@ -5,17 +5,27 @@
             "level": 0,
             "map": "MapImages/mountvillage.png",
             "position": [
-                231,
-                111
+                258,
+                182
             ]
         },
         {
-            "hp": 9,
-            "level": 1
+            "hp": 10,
+            "level": 0,
+            "map": "MapImages/mountvillage.png",
+            "position": [
+                313,
+                334
+            ]
         },
         {
             "hp": 10,
-            "level": 1
+            "level": 1,
+            "map": "MapImages/mountvillage.png",
+            "position": [
+                229,
+                486
+            ]
         }
     ]
 }
