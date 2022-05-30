@@ -1,7 +1,10 @@
 from . import player
 
-class mountain_villager_1:
-    look = "reccources/npcs/mountain_villager_1"
+class villager:
     def talkto(self,line,item):
         print(line)
         player.inventory.add(item)
+
+class mountain_villager (villager):
+    look = "reccources/npcs/mountain_villager"
+    

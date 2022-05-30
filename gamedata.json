@@ -2,10 +2,15 @@
     "savestates": [
         {
             "hp": 10,
-            "level": 1
+            "level": 0,
+            "map": "MapImages/mountvillage.png",
+            "position": [
+                284,
+                170
+            ]
         },
         {
-            "hp": 10,
+            "hp": 9,
             "level": 1
         },
         {

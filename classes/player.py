@@ -1,3 +1,4 @@
+from turtle import position
 from . import items
 
 class equipped:
@@ -15,6 +16,8 @@ class inventory:
         self.stuff.append(item)
 
 class stats:
+    map = "MapImages/mountvillage.png"
+    position = [100,200]
     level = 0
     hplist = [10,12,15,18,25,35]
     damage = equipped.hand.damage

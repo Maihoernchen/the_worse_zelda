@@ -2,7 +2,8 @@ from classes import player as player
 from classes import monster as monster
 from classes import npcs as npcs
 from classes import items as items
-from fetch import fetchdata
+from gamesave import fetchdata
+from gamesave import pushdata
 from startmenu import show
 
 savestate = show()
@@ -19,3 +20,5 @@ you = player.stats()
 print("You got attacked by an Ork!")
 ork.attack()
 print(you.hp)
+
+pushdata(0,"hp",you.hp)
