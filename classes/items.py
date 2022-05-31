@@ -3,6 +3,7 @@ from . import player
 
 class sonderbonbon:
     name = "sonderbonbon"
+    icon = "reccources/sonderbonbon.png"
     def use(self):
         player.stats.levelup()
         player.inventory.delete("sonderbonbon")

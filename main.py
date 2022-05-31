@@ -29,6 +29,7 @@ selected = startmenu.show()
 
 gameinfo = gamesave.fetchdata(selected)
 hp = gameinfo["hp"]
+inventory.stuff = gameinfo["inventory"]
 bg = pygame.image.load(gameinfo["map"])
 you.x,you.y = gameinfo["position"]
 vel = 1

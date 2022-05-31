@@ -17,9 +17,6 @@ class inventory:
         self.stuff.append(item.name)
     def delete(self,item):
         self.stuff.remove(item)
-    def use(self,item):
-        print(item)
-        items.item.use()
 
 class stats:
     map = "MapImages/mountvillage.png"
