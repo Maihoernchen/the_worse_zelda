@@ -1,12 +1,12 @@
 {
     "savestates": [
         {
-            "hp": 10,
-            "level": 0,
+            "hp": 12,
+            "level": 1,
             "map": "MapImages/mountvillage.png",
             "position": [
-                214,
-                164
+                326,
+                309
             ],
             "inventory": []
         },

@@ -3,13 +3,13 @@ from . import player
 
 class sonderbonbon:
     name = "sonderbonbon"
-    def eat(self):
+    def use(self):
         player.stats.levelup()
         player.inventory.delete("sonderbonbon")
 
 class backpack:
 
-    slots = 10
+    slots = 25
 
 class light_leather_armor:
     armor = 5

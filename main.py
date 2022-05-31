@@ -1,10 +1,14 @@
+import sys
 import pygame
 import time
 import gamesave
+import invsceen
+import combat
 import startmenu
 from classes import player
 from classes import npcs
 from classes import items
+from classes import monster
 
 pygame.init()
 
@@ -24,15 +28,15 @@ class you(pygame.sprite.Sprite):
 selected = startmenu.show()
 
 gameinfo = gamesave.fetchdata(selected)
-inventory.stuff=gameinfo["inventory"]
 hp = gameinfo["hp"]
 bg = pygame.image.load(gameinfo["map"])
 you.x,you.y = gameinfo["position"]
-vel = 2
+vel = 1
 foot = "left"
 f = 0
 win = pygame.display.set_mode((600,600))
 imag = ("reccources/southstand.png")
+direction = "south"
 
 def interact(x,y):
 	if x < 221 and x > 204 and y > 154 and y < 180:
@@ -40,12 +44,16 @@ def interact(x,y):
 		dialogue = font.render(line,True, (255,255,255),(0,0,0))
 		win.blit(dialogue, (430-you.x,300-you.y))
 		pygame.display.update()
-		pygame.time.delay(500)
+		pygame.time.delay(2000)
 		line = "You recieved" + item.name
 		dialogue = font.render("You recieved: Sonderbonbon",True, (255,255,255),(0,0,0))
+		win.fill((0, 0, 0))
+		win.blit(bg, (-you.x, -you.y))
+		win.blit(pygame.image.load(npcs.mountain_villager.image), (430-you.x,300-you.y))
+		win.blit(you.image, (you.x,you.y))
 		win.blit(dialogue, (430-you.x,300-you.y))
 		pygame.display.update()
-		pygame.time.delay(500)
+		pygame.time.delay(2000)
 
 def toggle(foot):
 	if foot == "left":
@@ -91,39 +99,47 @@ while run:
 
 	keys = pygame.key.get_pressed()
 
-	if f%5 == 0:
+	if f%10 == 0:
 		foot = toggle(foot)
  
 	if keys[pygame.K_SPACE]:
 		interact(you.x,you.y)
-
-	if keys[pygame.K_LEFT] and you.x>0 and not keys[pygame.K_RIGHT] and not keys[pygame.K_UP] and not keys[pygame.K_DOWN]:
+	elif keys[pygame.K_i]:
+		invsceen.main()
+	elif keys[pygame.K_LEFT] and you.x>0 and not keys[pygame.K_RIGHT] and not keys[pygame.K_UP] and not keys[pygame.K_DOWN]:
 		you.x -= vel
 		f+=1
+		direction = "west"
 		imag = 'reccources/westwalk' + foot + '.png'
-	if keys[pygame.K_RIGHT] and you.x<600 and not keys[pygame.K_LEFT] and not keys[pygame.K_UP] and not keys[pygame.K_DOWN]:
+	elif keys[pygame.K_RIGHT] and you.x<600 and not keys[pygame.K_LEFT] and not keys[pygame.K_UP] and not keys[pygame.K_DOWN]:
 		you.x += vel
 		f+=1
+		direction = "east"
 		imag = 'reccources/eastwalk' + foot + '.png'
 	# if left arrow key is pressed
-	if keys[pygame.K_UP] and you.y>0:
+	elif keys[pygame.K_UP] and you.y>0:
 
 		# decrement in y co-ordinate
 		you.y -= vel
 		f+=1
+		direction = "north"
 		imag = 'reccources/northwalk' + foot + '.png'
 	# if left arrow key is pressed
-	if keys[pygame.K_DOWN] and you.y<600:
+	elif keys[pygame.K_DOWN] and you.y<600:
 		you.y += vel
 		f+=1
+		direction = "south"
 		imag = 'reccources/southwalk' + foot + '.png'
-	if keys[pygame.K_ESCAPE]:
+	elif keys[pygame.K_ESCAPE]:
 		gamesave.pushdata(selected)
 		run = False
+	else:
+		imag = 'reccources/'+ direction + 'stand.png'
+
 	if you.x == 0 and you.y == 0:
 
-		situation = "combat"
 		blink(3)
+		combat.main(monster.ork)
 
 	you.image = pygame.image.load(imag)
 	win.fill((0, 0, 0))
@@ -132,16 +148,5 @@ while run:
 	win.blit(you.image, (you.x,you.y))
 	player.stats.position = you.x,you.y
 	pygame.display.update()
-
-	while situation == "combat" and run:
-		for event in pygame.event.get():
-
-			if event.type == pygame.QUIT:
-
-				run = False
-
-		win.fill((255,255,255))
-		win.blit(bg, (0-you.x,0-you.y))
-		pygame.display.update()
 
 pygame.quit()
