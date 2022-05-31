@@ -3,8 +3,17 @@ import time
 import gamesave
 import startmenu
 from classes import player
+from classes import npcs
+from classes import items
 
 pygame.init()
+
+pygame.font.init()
+
+font = pygame.font.SysFont("arial", 20)
+
+inventory = player.inventory()
+mountain_villager = npcs.mountain_villager()
 
 class you(pygame.sprite.Sprite):
 	image = pygame.image.load('reccources/southstand.png')
@@ -15,14 +24,28 @@ class you(pygame.sprite.Sprite):
 selected = startmenu.show()
 
 gameinfo = gamesave.fetchdata(selected)
+inventory.stuff=gameinfo["inventory"]
 hp = gameinfo["hp"]
 bg = pygame.image.load(gameinfo["map"])
 you.x,you.y = gameinfo["position"]
-vel = 1
+vel = 2
 foot = "left"
 f = 0
 win = pygame.display.set_mode((600,600))
 imag = ("reccources/southstand.png")
+
+def interact(x,y):
+	if x < 221 and x > 204 and y > 154 and y < 180:
+		line,item = mountain_villager.talkto("Hey there, I got a suprise for you!",items.sonderbonbon)	
+		dialogue = font.render(line,True, (255,255,255),(0,0,0))
+		win.blit(dialogue, (430-you.x,300-you.y))
+		pygame.display.update()
+		pygame.time.delay(500)
+		line = "You recieved" + item.name
+		dialogue = font.render("You recieved: Sonderbonbon",True, (255,255,255),(0,0,0))
+		win.blit(dialogue, (430-you.x,300-you.y))
+		pygame.display.update()
+		pygame.time.delay(500)
 
 def toggle(foot):
 	if foot == "left":
@@ -68,14 +91,17 @@ while run:
 
 	keys = pygame.key.get_pressed()
 
-	if f%20 == 0:
+	if f%5 == 0:
 		foot = toggle(foot)
  
-	if keys[pygame.K_LEFT] and you.x>0:
+	if keys[pygame.K_SPACE]:
+		interact(you.x,you.y)
+
+	if keys[pygame.K_LEFT] and you.x>0 and not keys[pygame.K_RIGHT] and not keys[pygame.K_UP] and not keys[pygame.K_DOWN]:
 		you.x -= vel
 		f+=1
 		imag = 'reccources/westwalk' + foot + '.png'
-	if keys[pygame.K_RIGHT] and you.x<600:
+	if keys[pygame.K_RIGHT] and you.x<600 and not keys[pygame.K_LEFT] and not keys[pygame.K_UP] and not keys[pygame.K_DOWN]:
 		you.x += vel
 		f+=1
 		imag = 'reccources/eastwalk' + foot + '.png'
@@ -100,9 +126,9 @@ while run:
 		blink(3)
 
 	you.image = pygame.image.load(imag)
-	print(imag)
 	win.fill((0, 0, 0))
 	win.blit(bg, (-you.x, -you.y))
+	win.blit(pygame.image.load(npcs.mountain_villager.image), (430-you.x,300-you.y))
 	win.blit(you.image, (you.x,you.y))
 	player.stats.position = you.x,you.y
 	pygame.display.update()

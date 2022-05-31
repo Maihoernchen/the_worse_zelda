@@ -1,4 +1,11 @@
 import random
+from . import player
+
+class sonderbonbon:
+    name = "sonderbonbon"
+    def eat(self):
+        player.stats.levelup()
+        player.inventory.delete("sonderbonbon")
 
 class backpack:
 

@@ -5,9 +5,10 @@
             "level": 0,
             "map": "MapImages/mountvillage.png",
             "position": [
-                229,
-                241
-            ]
+                214,
+                164
+            ],
+            "inventory": []
         },
         {
             "hp": 10,

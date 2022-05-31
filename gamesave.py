@@ -15,6 +15,7 @@ def pushdata(savestate):
     gamedata["savestates"][savestate]["level"] = player.stats.level
     gamedata["savestates"][savestate]["position"] = player.stats.position
     gamedata["savestates"][savestate]["map"] = player.stats.map
+    gamedata["savestates"][savestate]["inventory"] = player.inventory.stuff
     print(gamedata)
     tempgamedata = json.dumps(gamedata, indent = 4)
     with open('gamedata.json', 'w') as outfile:
