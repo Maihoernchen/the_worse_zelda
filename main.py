@@ -58,8 +58,7 @@ def interact(x,y):
 			pygame.time.delay(2000)
 			mountain_villager.used = True
 		elif mountain_villager.used == True:
-			line,item = mountain_villager.talkto("Use it!",items.nothing)	
-			dialogue = font.render(line,True, (255,255,255),(0,0,0))
+			dialogue = font.render('Use it',True, (255,255,255),(0,0,0))
 			win.blit(dialogue, (430-you.x,300-you.y))
 			pygame.display.update()
 			pygame.time.delay(2000)
