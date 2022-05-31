@@ -6,9 +6,11 @@
             "map": "MapImages/mountvillage.png",
             "position": [
                 215,
-                204
+                174
             ],
-            "inventory": []
+            "inventory": [
+                "nothing"
+            ]
         },
         {
             "hp": 10,

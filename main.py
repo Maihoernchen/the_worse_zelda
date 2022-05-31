@@ -41,21 +41,28 @@ direction = "south"
 
 def interact(x,y):
 	if x < 221 and x > 204 and y > 154 and y < 180:
-		line,item = mountain_villager.talkto("Hey there, I got a suprise for you!",items.sonderbonbon)	
-		dialogue = font.render(line,True, (255,255,255),(0,0,0))
-		win.blit(dialogue, (430-you.x,300-you.y))
-		pygame.display.update()
-		pygame.time.delay(2000)
-		line = "You recieved" + item.name
-		dialogue = font.render("You recieved: Sonderbonbon",True, (255,255,255),(0,0,0))
-		win.fill((0, 0, 0))
-		win.blit(bg, (-you.x, -you.y))
-		win.blit(pygame.image.load(npcs.mountain_villager.image), (430-you.x,300-you.y))
-		win.blit(you.image, (you.x,you.y))
-		win.blit(dialogue, (430-you.x,300-you.y))
-		pygame.display.update()
-		pygame.time.delay(2000)
-
+		if mountain_villager.used == False:
+			line,item = mountain_villager.talkto("Hey there, I got a suprise for you!",items.sonderbonbon)	
+			dialogue = font.render(line,True, (255,255,255),(0,0,0))
+			win.blit(dialogue, (430-you.x,300-you.y))
+			pygame.display.update()
+			pygame.time.delay(2000)
+			line = "You recieved" + item.name
+			dialogue = font.render("You recieved: Sonderbonbon",True, (255,255,255),(0,0,0))
+			win.fill((0, 0, 0))
+			win.blit(bg, (-you.x, -you.y))
+			win.blit(pygame.image.load(npcs.mountain_villager.image), (430-you.x,300-you.y))
+			win.blit(you.image, (you.x,you.y))
+			win.blit(dialogue, (430-you.x,300-you.y))
+			pygame.display.update()
+			pygame.time.delay(2000)
+			mountain_villager.used = True
+		elif mountain_villager.used == True:
+			line,item = mountain_villager.talkto("Use it!",items.nothing)	
+			dialogue = font.render(line,True, (255,255,255),(0,0,0))
+			win.blit(dialogue, (430-you.x,300-you.y))
+			pygame.display.update()
+			pygame.time.delay(2000)
 def toggle(foot):
 	if foot == "left":
 		foot = "right"

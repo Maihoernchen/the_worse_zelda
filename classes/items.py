@@ -5,8 +5,10 @@ class sonderbonbon:
     name = "sonderbonbon"
     icon = "reccources/sonderbonbon.png"
     def use(self):
-        player.stats.levelup()
-        player.inventory.delete("sonderbonbon")
+        stats = player.stats()
+        inventory = player.inventory()
+        stats.levelup()
+        inventory.delete("sonderbonbon")
 
 class backpack:
 
@@ -18,6 +20,7 @@ class light_leather_armor:
     durability = 60
 
 class nothing:
+    name = "nothing"
     damage = 5
     armor = 1
     slow = 0
