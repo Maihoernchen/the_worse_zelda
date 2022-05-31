@@ -2,7 +2,7 @@
 
 execute main.py
 
-pip has to be install
+pygame has to be installed
 
 use arrow keys to move, space to interact and i to open inventory
 
